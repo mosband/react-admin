@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import { Form, Icon, Input, Button } from "antd";
+import axios from "axios";
 
 class LoginForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log("Received values of form: ", values);
+        axios.post("/api/login", values).then(res => {
+          console.log("res", res);
+        });
       }
     });
   };
