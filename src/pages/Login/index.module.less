@@ -1,0 +1,83 @@
+.login {
+    height: 100%;
+    background-image: linear-gradient(to right, pink, skyblue, yellowgreen, pink);
+    background-size: 400%;
+    animation: bg 30s linear infinite;
+
+    .loginHeader {
+        display: flex;
+        align-items: center;
+        height: 60px;
+        padding: 0 60px;
+        background-image: linear-gradient(to right, #333, #303030);
+
+        .logo {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin-right: 12px;
+            background-color: deepskyblue;
+            border: 2px solid #fff;
+            overflow: hidden;
+
+            &::before {
+                content: "";
+                position: absolute;
+                top: -36px;
+                width: 50px;
+                height: 50px;
+                border-radius: 20px;
+                background-color: #fff;
+                animation: turn 3s linear infinite;
+            }
+        }
+
+        .title {
+            font-size: 20px;
+            color: #fff;
+        }
+    }
+
+    .loginContent {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -60%);
+        width: 360px;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 2px 2px 5px #333333;
+        border-radius: 3px;
+
+        .title {
+            margin-bottom: 24px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    }
+}
+
+@keyframes bg {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: -400% 0;
+    }
+}
+
+@keyframes turn {
+    from {
+        transform: rotate(0)
+    }
+
+    to {
+        transform: rotate(360deg)
+    }
+}
