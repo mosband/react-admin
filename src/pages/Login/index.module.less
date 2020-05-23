@@ -1,83 +1,82 @@
 .login {
     height: 100%;
-    background-image: linear-gradient(to right, pink, skyblue, yellowgreen, pink);
-    background-size: 400%;
-    animation: bg 30s linear infinite;
+    background-image: linear-gradient(to right, #001133 10%, #005577 50%, #001133 90%);
+}
 
-    .loginHeader {
-        display: flex;
-        align-items: center;
-        height: 60px;
-        padding: 0 60px;
-        background-image: linear-gradient(to right, #333, #303030);
 
-        .logo {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            margin-right: 12px;
-            background-color: deepskyblue;
-            border: 2px solid #fff;
-            overflow: hidden;
+@period: 30s;
+@minBlur: 1px;
+@maxBlur: 3px;
+@delay: -28s;
 
-            &::before {
-                content: "";
-                position: absolute;
-                top: -36px;
-                width: 50px;
-                height: 50px;
-                border-radius: 20px;
-                background-color: #fff;
-                animation: turn 3s linear infinite;
-            }
-        }
+.logoBox {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 190vh;
+    transform-origin: center bottom;
+    animation: rotateCW @period @delay linear infinite;
 
-        .title {
-            font-size: 20px;
-            color: #fff;
-        }
-    }
-
-    .loginContent {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -60%);
-        width: 360px;
-        padding: 20px;
-        background-color: #fff;
-        box-shadow: 2px 2px 5px #333333;
-        border-radius: 3px;
-
-        .title {
-            margin-bottom: 24px;
-            text-align: center;
-            font-size: 20px;
-            font-weight: bold;
-        }
+    .logo {
+        animation: rotateCCW @period @delay linear infinite, sunshine @period @delay linear infinite;
     }
 }
 
-@keyframes bg {
-    from {
-        background-position: 0 0;
-    }
-
+@keyframes rotateCW {
     to {
-        background-position: -400% 0;
+        transform: rotate(360deg);
     }
 }
 
-@keyframes turn {
+@keyframes rotateCCW {
+    to {
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes sunshine {
     from {
-        transform: rotate(0)
+        filter: brightness(0.2) blur(@minBlur);
+    }
+
+    20% {
+        filter: brightness(1.3) blur(@maxBlur);
+    }
+
+    25% {
+        filter: brightness(1.5) blur(@maxBlur);
+    }
+
+    30% {
+        filter: brightness(1.3) blur(@maxBlur);
+
+    }
+
+    50% {
+        filter: brightness(0.2) blur(@minBlur);
     }
 
     to {
-        transform: rotate(360deg)
+        filter: brightness(0.2) blur(@minBlur);
+    }
+}
+
+.loginContent {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 360px;
+    padding: 0 24px;
+    background-color: #fff;
+    box-shadow: 2px 2px 5px #333333;
+    border-radius: 3px;
+
+    .title {
+        line-height: 56px;
+        font-size: 20px;
+        text-align: center;
     }
 }

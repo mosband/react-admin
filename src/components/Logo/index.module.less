@@ -1,0 +1,30 @@
+.logo {
+    display: inline-block;
+    position: relative;
+    border-radius: 50%;
+    background-color: deepskyblue;
+    border: 1px solid deepskyblue;
+    overflow: hidden;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: -72%;
+        left: 50%;
+        width: 120%;
+        height: 120%;
+        border-radius: 36%;
+        background-color: #fff;
+        animation: fakeWave 3s linear infinite;
+    }
+}
+
+@keyframes fakeWave {
+    from {
+        transform: translateX(-50%) rotate(0);
+    }
+
+    to {
+        transform: translateX(-50%) rotate(360deg);
+    }
+}
