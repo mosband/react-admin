@@ -11,7 +11,7 @@ router.post("/login", (req, res) => {
   const { username, password } = req.body;
   if (username === "admin" && password === "admin") {
     // 登陆成功
-    res.send({ status: 0, data: { userid: 10000 } });
+    res.send({ status: 0, data: { userid: 10000, username } });
   } else {
     // 登陆失败
     res.send({ status: 1, msg: "用户名或密码不正确" });

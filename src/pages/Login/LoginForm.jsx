@@ -1,14 +1,20 @@
 import React, { Component } from "react";
-import { Form, Icon, Input, Button } from "antd";
+import { Form, Icon, Input, Button, message } from "antd";
+import { withRouter } from "react-router-dom";
 
 class LoginForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
-    this.props.form.validateFields((err, values) => {
+    this.props.form.validateFields(async (err, values) => {
       if (!err) {
-        React.$post("/login", values).then(res => {
-          console.log("res", res);
-        });
+        const res = await React.$post("/login", values);
+        if (res.status === 0) {
+          message.success("登录成功");
+          React.$setUser(res.data || {});
+          this.props.history.replace("/");
+        } else {
+          message.error(res.msg || "登录失败");
+        }
       }
     });
   };
@@ -53,4 +59,4 @@ class LoginForm extends Component {
   }
 }
 
-export default Form.create({})(LoginForm);
+export default withRouter(Form.create({})(LoginForm));
