@@ -7,8 +7,14 @@ import { menuRoutes } from "@/config/routes.admin.js";
 const { SubMenu } = Menu;
 
 class NavMenu extends Component {
-  transform = route => {
+  getMenuNode = route => {
     if (route.children) {
+      const childNodes = route.children.map(child => {
+        if (this.props.location.pathname === child.path) {
+          this.openKey = route.path;
+        }
+        return this.getMenuNode(child);
+      });
       return (
         <SubMenu
           key={route.path}
@@ -19,7 +25,7 @@ class NavMenu extends Component {
             </span>
           }
         >
-          {route.children.map(child => this.transform(child))}
+          {childNodes}
         </SubMenu>
       );
     } else {
@@ -34,6 +40,10 @@ class NavMenu extends Component {
     }
   };
 
+  UNSAFE_componentWillMount() {
+    this.menuNodes = menuRoutes.map(route => this.getMenuNode(route));
+  }
+
   render() {
     return (
       <div className={style.navMenu} style={{ color: "#fff" }}>
@@ -46,11 +56,11 @@ class NavMenu extends Component {
         <div className={style.menuBox}>
           <Menu
             selectedKeys={[this.props.location.pathname]}
-            defaultOpenKeys={[]}
+            defaultOpenKeys={[this.openKey]}
             mode="inline"
             theme="dark"
           >
-            {menuRoutes.map(route => this.transform(route))}
+            {this.menuNodes}
           </Menu>
         </div>
       </div>
