@@ -1,5 +1,6 @@
 import axios from "axios";
 import qs from "qs";
+import _jsonp from "jsonp";
 import { API_BASE_URL as baseURL } from "../config/global.config.js";
 const instance = axios.create({
   baseURL,
@@ -29,3 +30,13 @@ export default instance;
 export const get = (url, params) => instance.get(url, { params });
 
 export const post = (url, data, config) => instance.post(url, data, config);
+
+export const jsonp = url =>
+  new Promise((resolve, reject) => {
+    _jsonp(url, {}, (err, data) => {
+      if (err) {
+        reject(err);
+      }
+      resolve(data);
+    });
+  });

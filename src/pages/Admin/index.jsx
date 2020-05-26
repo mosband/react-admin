@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { Layout } from "antd";
 import NavMenu from "@/components/NavMenu";
+import Header from "@/components/Header";
 import { routes, defaultRoute } from "@/config/routes.admin.js";
-const { Header, Footer, Sider, Content } = Layout;
+const { Footer, Sider, Content } = Layout;
 
 export default class Admin extends Component {
   render() {
@@ -17,7 +18,7 @@ export default class Admin extends Component {
           <NavMenu />
         </Sider>
         <Layout>
-          <Header style={{ color: "#fff" }}>Hello {user.username}</Header>
+          <Header />
           <Content style={{ backgroundColor: "#fff" }}>
             <Switch>
               {routes.map(route => (
