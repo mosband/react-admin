@@ -7,3 +7,13 @@ export const addRoutes = (target, source) => {
     }
   });
 };
+
+export const makePathRouteMap = routes => {
+  const map = Object.create(null);
+  routes.forEach(route => {
+    if (route.path && route.component) {
+      map[route.path] = route;
+    }
+  });
+  return map;
+};

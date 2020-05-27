@@ -1,4 +1,4 @@
-import { addRoutes } from "@/utils/routesUtils";
+import { addRoutes, makePathRouteMap } from "@/utils/routesUtils";
 import Home from "@/pages/Home";
 import Bar from "@/pages/EchartsDemo/Bar";
 import Line from "@/pages/EchartsDemo/Line";
@@ -35,8 +35,10 @@ export const menuRoutes = [
   }
 ];
 
-export const routes = [];
+const _routes = [];
+addRoutes(_routes, menuRoutes);
+export const routes = _routes;
 
-addRoutes(routes, menuRoutes);
+export const pathRouteMap = makePathRouteMap(routes);
 
 export const defaultRoute = menuRoutes[0];
