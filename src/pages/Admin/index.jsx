@@ -19,7 +19,7 @@ export default class Admin extends Component {
         </Sider>
         <Layout>
           <Header />
-          <Content style={{ backgroundColor: "#fff" }}>
+          <Content style={{ display: "flex", backgroundColor: "#fff" }}>
             <Switch>
               {routes.map(route => (
                 <Route

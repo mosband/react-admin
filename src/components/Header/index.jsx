@@ -64,7 +64,7 @@ class Header extends Component {
           <span className={style.left}>{this.state.time}</span>
           <span className={style.right}>
             <span>{user.username}</span>
-            <Button type="primary" onClick={this.logout}>
+            <Button type="link" onClick={this.logout} className={style.btnLink}>
               退出
             </Button>
           </span>
