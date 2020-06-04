@@ -3,6 +3,7 @@ import Home from "@/pages/Home";
 import Bar from "@/pages/EchartsDemo/Bar";
 import Line from "@/pages/EchartsDemo/Line";
 import Pie from "@/pages/EchartsDemo/Pie";
+import Circle from "@/pages/D3Demo/Circle";
 
 export const menuRoutes = [
   {
@@ -30,6 +31,18 @@ export const menuRoutes = [
         path: "/echarts/pie",
         title: "饼状图",
         component: Pie
+      }
+    ]
+  },
+  {
+    path: "/d3",
+    title: "D3.js 示例",
+    icon: "area-chart",
+    children: [
+      {
+        path: "/echarts/circle",
+        title: "圆",
+        component: Circle
       }
     ]
   }

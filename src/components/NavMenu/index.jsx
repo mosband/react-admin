@@ -10,9 +10,6 @@ class NavMenu extends Component {
   getMenuNode = route => {
     if (route.children) {
       const childNodes = route.children.map(child => {
-        if (this.props.location.pathname === child.path) {
-          this.openKey = route.path;
-        }
         return this.getMenuNode(child);
       });
       return (
@@ -40,11 +37,47 @@ class NavMenu extends Component {
     }
   };
 
+  getOpenKeys = () => {
+    let found = false;
+    const dfs = route => {
+      if (route.children && !found) {
+        route.children.forEach(child => {
+          if (this.props.location.pathname === child.path) {
+            this.openKeys = this.openKeys
+              ? [...new Set([...this.openKeys, route.path])]
+              : [route.path];
+            found = true;
+          } else {
+            dfs(child);
+          }
+        });
+      }
+    };
+    for (const route of menuRoutes) {
+      if (!found) {
+        dfs(route);
+      } else {
+        break;
+      }
+    }
+  };
+
+  onOpenChange = openKeys => {
+    this.notGetOpenKeys = true;
+    this.openKeys = openKeys;
+    this.forceUpdate();
+  };
+
   UNSAFE_componentWillMount() {
     this.menuNodes = menuRoutes.map(route => this.getMenuNode(route));
   }
 
   render() {
+    if (this.notGetOpenKeys) {
+      this.notGetOpenKeys = false;
+    } else {
+      this.getOpenKeys();
+    }
     return (
       <div className={style.navMenu} style={{ color: "#fff" }}>
         <Link to="/">
@@ -56,7 +89,8 @@ class NavMenu extends Component {
         <div className={style.menuBox}>
           <Menu
             selectedKeys={[this.props.location.pathname]}
-            defaultOpenKeys={[this.openKey]}
+            openKeys={this.openKeys}
+            onOpenChange={this.onOpenChange}
             mode="inline"
             theme="dark"
           >
